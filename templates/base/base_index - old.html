@@ -1,0 +1,79 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Ying Shi Shu Ping</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link href="{% static 'css/navbar-fixed-top.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{% url 'main:main_index' %}">Ying Shi Shu Ping</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="{% url 'books:book_list' %}">Books</a></li>
+                        <li><a href="{% url 'movies:movie_list' %}">Movies</a></li>
+                    </ul>
+                    <div class="col-sm-3 col-md-6">
+                        <form class="navbar-form" role="search">
+                            <div class="input-group">
+                                <div class="input-group-btn search-panel">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <span id="search_concept">All</span> <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">All</a></li>
+                                        <li><a href="#">Books</a></li>
+                                        <li><a href="#">Movies</a></li>
+                                    </ul>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Search" name="q">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{% url 'main:main_login' %}">login</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                    {% block content_1 %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src= "{% static 'js / jquery.min.js' %}"><\/script>')</script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function (e) {
+                $('.search-panel .dropdown-menu').find('a').click(function (e) {
+                    e.preventDefault();
+                    var param = $(this).attr("href").replace("#", "");
+                    var concept = $(this).text();
+                    $('.search-panel span#search_concept').text(concept);
+                    $('.input-group #search_param').val(param);
+                });
+            });
+        </script>
+    </body>
+</html>

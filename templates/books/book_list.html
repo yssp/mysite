@@ -1,0 +1,47 @@
+{% extends 'base/base_index.html' %}
+
+{% block content_1 %}
+
+<div class="col-md-12 container">
+    <div class="row">
+        <div class="col-md-2">
+            <h1>书籍</h1>
+        </div>
+        <div class="col-md-8">
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'books:book_create' %}">
+                <h3>添加书籍</h3>
+            </a>
+        </div>
+    </div>
+    <hr/>
+    {% if object_list %}
+    {% for book in object_list %}
+    <div class="row">
+        <div class="col-md-3">
+            <a href="{% url 'books:book_detail' book.id %}">
+                <img src="{{ book.book_image.url }}" width = "100" height = "100"/>
+            </a>
+        </div>
+        <div class="col-md-1">         
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <a href="{% url 'books:book_detail' book.id %}" class="text-primary">{{ book.book_name }}</a>
+            </div>
+            <div class="row">
+                <p class="text-muted">{{ book.book_content }}</p>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    {% endfor %}
+    {% endif %}
+
+</div>
+
+{% endblock %}
+
+
+

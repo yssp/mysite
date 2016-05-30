@@ -1,0 +1,70 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>影视书评</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link href="{% static 'css/navbar-fixed-top.css' %}" rel="stylesheet">
+        <style>            
+            #search_form {
+                margin-top: 10px;
+            } 
+        </style>
+    </head>
+    <body>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-default navbar-fixed-top bg-faded" style="background-color: #e3f2fd;">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{% url 'main:main_index' %}">影视书评</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="{% url 'books:book_list' %}">书籍</a></li>
+                        <li><a href="{% url 'movies:movie_list' %}">影视</a></li>
+                    </ul>
+                    <div class="row nav navbar-nav" >
+                        <form role="form" class="form-inline" id="search_form">{% csrf_token %}  
+                            <select id="sel1" name="sel1" style="width:auto;" class="form-control selectWidth">
+                                <option class="">全部</option>
+                                <option class="">书籍</option>
+                                <option class="">影视</option>
+                            </select>
+                            <input type="text" class="form-control" name = "q" placeholder="Search">
+                            <button class="btn btn-primary" type="submit" name="search_btn">Search</button>
+                        </form>
+                    </div> <!-- End Row -->
+                    <!--
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{% url 'main:main_login' %}">login</a></li>
+                    </ul> 
+                    -->
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-12">
+                    {% block content_1 %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src= "{% static 'js / jquery.min.js' %}"><\/script>');</script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script>
+            $("#chaper_head li:first-child").addClass("active");
+            $("#chaper_body div:first-child").addClass("in active");
+        </script>
+    </body>
+</html>
